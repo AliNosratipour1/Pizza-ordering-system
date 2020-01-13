@@ -2,6 +2,7 @@ import React from 'react';
 import { createGlobalStyle } from 'styled-components'
 import {Navbar} from './Navbar/Navbar';
 import {Banner} from './Banner/banner';
+import {Menu} from './Menu/menu';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -22,6 +23,7 @@ function App() {
     <GlobalStyle/>
     <Navbar/>
     <Banner/>
+    <Menu/>
     <div >
       hello pizza
     </div>

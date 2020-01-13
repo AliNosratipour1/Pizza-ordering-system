@@ -10,13 +10,14 @@ import {Title} from '../Styles/title';
   padding:10px;
   position:fixed;
   width:100%;
-
+  z-index:999;
 `
 // our Logo
 const Logo = styled(Title)`
  font-size:20px;
  color:white;
  text-shadow:1px 1px 4px #380502;
+
 `
 
 
