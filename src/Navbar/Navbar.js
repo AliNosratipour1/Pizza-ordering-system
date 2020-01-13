@@ -2,11 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 import {pizzaRed }from '../Styles/colors';
 import {Title} from '../Styles/title';
+ 
+ 
+ // our Navbar
  const NavbarStyled = styled.div `
   background-color:${pizzaRed};
   padding:10px;
-`
+  position:fixed;
+  width:100%;
 
+`
+// our Logo
 const Logo = styled(Title)`
  font-size:20px;
  color:white;
@@ -20,6 +26,6 @@ export function Navbar(){
     <Logo>
         Barbican Express
     </Logo>
-        HELLO NAVBAR
+       
     </NavbarStyled>
 }
