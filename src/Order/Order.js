@@ -32,19 +32,22 @@ const OrderFooter = styled.div`
 
 
 
-export function Order(){
+export function Order({orders}){
     return(
-        <div>
+       
             <OrderStyled>
-              
-                  <OrderContent>
-                      Your basket is empty
-                  </OrderContent>
+                  {orders.length === 0 ? (
+                     <OrderContent> Your basket is empty</OrderContent> 
+                     
+                  ) : (
+                   <OrderContent>Found {orders.length} orders</OrderContent>
+                  )}
+                  
                   <DialogFooter>
                       <ConfirmButton>CheckOut</ConfirmButton>
                   </DialogFooter>
               
             </OrderStyled>
-        </div>
+        
     )
 }
