@@ -4,6 +4,8 @@ import {FoodLabel} from '../Menu/FoodGrid';
 import {pizzaRed} from '../Styles/colors';
 import {Title} from '../Styles/title';
 import {formatPrice} from '../Data/FoodFData';
+import {QuantityInput} from './QuantityInput';
+import {useQuantity} from '../Hooks/useQuantity';
 
 //${({ img }) => `backgrond-image: url(${img});`}
 
@@ -23,6 +25,7 @@ flex-direction:column;
 export const DialogContent = styled.div`
  overflow:auto;
  min-height:100px;
+ padding:0px 40px;
 `;
 
  export const DialogFooter = styled.div`
@@ -71,14 +74,15 @@ padding:5px 40px;
 
 
 
-export function FoodDialog({openFood , setOpenFood,setOrders,orders}){
+ function FoodDialogContainer({openFood , setOpenFood,setOrders,orders}){
+   const Quantity = useQuantity(openFood && openFood.Quantity);
    function close(){
        setOpenFood();
    }
    
   
   
-   if (!openFood )return null;
+  
  
   const order = {
     ...openFood
@@ -96,7 +100,9 @@ export function FoodDialog({openFood , setOpenFood,setOrders,orders}){
          <DialogBanner img={openFood.img} >
             <DialogBannerName>{openFood.name}</DialogBannerName>
          </DialogBanner>
-         <DialogContent></DialogContent>
+         <DialogContent>
+           <QuantityInput Quantity={Quantity}/>
+         </DialogContent>
          <DialogFooter>
            <ConfirmButton onClick={addToOrder}>
            Add to Order {formatPrice(openFood.price)}
@@ -107,4 +113,9 @@ export function FoodDialog({openFood , setOpenFood,setOrders,orders}){
     </>
    
    ); 
+}
+
+export function FoodDialog(props){
+  if (!props.openFood )return null;
+  return <FoodDialogContainer {...props}/>
 }
