@@ -75,7 +75,7 @@ padding:5px 40px;
 
 
  function FoodDialogContainer({openFood , setOpenFood,setOrders,orders}){
-   const Quantity = useQuantity(openFood && openFood.Quantity);
+   const quantity = useQuantity(openFood && openFood.quantity);
    function close(){
        setOpenFood();
    }
@@ -101,7 +101,7 @@ padding:5px 40px;
             <DialogBannerName>{openFood.name}</DialogBannerName>
          </DialogBanner>
          <DialogContent>
-           <QuantityInput Quantity={Quantity}/>
+           <QuantityInput quantity={quantity}/>
          </DialogContent>
          <DialogFooter>
            <ConfirmButton onClick={addToOrder}>
