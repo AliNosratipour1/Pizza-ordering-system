@@ -49,6 +49,13 @@ export const ConfirmButton = styled(Title)`
  width:200px;
  cursor:pointer;
  background-color:${pizzaRed};
+ ${({disabled}) => disabled &&
+ 
+`
+opacity:.5;
+background-color:gray;
+pointer-events:none;
+ `}
 `;
 
 const DialogShadow = styled.div`
@@ -130,7 +137,7 @@ return food.section === 'Pizza';
           { openFood.choices && <Choices openFood={openFood} choiceRadio={choiceRadio} />}
          </DialogContent>
          <DialogFooter>
-           <ConfirmButton onClick={addToOrder}>
+           <ConfirmButton onClick={addToOrder} disabled={openFood.choices && !choiceRadio.value}>
            Add to Order {formatPrice(getPrice(order))}
            </ConfirmButton>
          </DialogFooter>

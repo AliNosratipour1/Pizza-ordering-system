@@ -1,4 +1,16 @@
 import React from 'react';
+import styled from 'styled-components';
+
+
+const CursorPointer = `cursor:pointer`;
+
+const RadioInput = styled.input`
+${CursorPointer}
+`; 
+
+const Label = styled.label`
+${CursorPointer}
+`; 
 
 export function Choices({openFood,choiceRadio }){
   return(
@@ -14,7 +26,7 @@ export function Choices({openFood,choiceRadio }){
             checked={choiceRadio.value === choice}
             onChange={choiceRadio.onChange}
             />
-            <label  for={choice}> {choice} </label>{" "}
+            <Label  for={choice}> {choice} </Label>{" "}
             </>
         ))}
     </>
