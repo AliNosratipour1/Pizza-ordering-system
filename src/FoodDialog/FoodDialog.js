@@ -6,9 +6,12 @@ import {Title} from '../Styles/title';
 import {formatPrice} from '../Data/FoodFData';
 import {QuantityInput} from './QuantityInput';
 import {useQuantity} from '../Hooks/useQuantity';
-
+import {Toppings} from './Toppings';
+import {useToppings} from '../Hooks/useToppings';
+import {useChoice} from '../Hooks/useChoice';
+import {Choices} from './Choices';
 //${({ img }) => `backgrond-image: url(${img});`}
-
+//background-image: ${({img}) => `url(${img});`};
 const Dialog = styled.div`
 width:500px;
 background-color:white;
@@ -26,6 +29,7 @@ export const DialogContent = styled.div`
  overflow:auto;
  min-height:100px;
  padding:0px 40px;
+ padding-bottom:80px;
 `;
 
  export const DialogFooter = styled.div`
@@ -60,7 +64,10 @@ z-index:4;
 const DialogBanner = styled.div`
 min-height:200px;
 margin-bottom:20px;
-background-image: ${({img}) => `url(${img});`};
+
+${({ img }) => (img ? `background-image: url(${img});` : `min-height: 75px;`)}
+
+
 background-position:center;
 background-size:cover;
 `;
@@ -69,15 +76,22 @@ const DialogBannerName = styled(FoodLabel)`
 top:100px;
 font-size:30px;
 padding:5px 40px;
+top: ${({img})=> (img ? `100px` : `20px`)};
 `
 
-
+const pricePerTaopping = 0.5;
 export function getPrice(order){
-return order.quantity * order.price;
+return order.quantity * ( order.price + order.toppings.filter(t => t.checked).length * pricePerTaopping );
+}
+
+function hasToppings(food){
+return food.section === 'Pizza';
 }
 
  function FoodDialogContainer({openFood , setOpenFood,setOrders,orders}){
    const quantity = useQuantity(openFood && openFood.quantity);
+   const toppings = useToppings(openFood.toppings);
+   const choiceRadio = useChoice(openFood.choice);
    function close(){
        setOpenFood();
    }
@@ -88,8 +102,11 @@ return order.quantity * order.price;
  
   const order = {
     ...openFood,
-    quantity:quantity.value
-  }
+    quantity:quantity.value,
+    toppings:toppings.toppings,
+    choice:choiceRadio.value
+  };
+
    function addToOrder(){
     setOrders([...orders,order]);
     close();
@@ -105,6 +122,12 @@ return order.quantity * order.price;
          </DialogBanner>
          <DialogContent>
            <QuantityInput quantity={quantity}/>
+           {hasToppings(openFood)  && <>
+             <h3>Customiz Your Pizza</h3>
+           <Toppings  {...toppings} />
+
+            </>} 
+          { openFood.choices && <Choices openFood={openFood} choiceRadio={choiceRadio} />}
          </DialogContent>
          <DialogFooter>
            <ConfirmButton onClick={addToOrder}>

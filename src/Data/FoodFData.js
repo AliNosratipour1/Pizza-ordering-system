@@ -54,6 +54,14 @@ name:'Chips',
 img:'/img/fries.jpeg',
 section:'Chips',
 price:3.5
+},
+{
+  price: 1,
+  name:'soda',
+  section:'Drinks',
+  choices: ['Coke', 'Sprite', 'Root Beer']
+
+
 }
 
 ];
