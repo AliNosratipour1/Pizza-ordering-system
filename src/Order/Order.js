@@ -27,9 +27,10 @@ height:100%;
 const OrderContainer = styled.div`
 padding:10px 0px;
 border-bottom:1px solid gray;
-${({editable}) => editable ?`
+${({editable}) => editable
+ ?`
 
-&:hover:{
+&:hover {
     cursor:pointer;
     background-color:#e7e7e7;
   }
